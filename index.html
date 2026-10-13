@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="SESエンジニアのためのAIリテラシー。20分・全14枚の講習用スライド。">
+<title>SESエンジニアのためのAIリテラシー</title>
+<style>
+:root{--ink:#152c40;--text:#222f3a;--muted:#50606c;--blue:#185a7d;--line:#b7c4cb;--paper:#fff;--soft:#f0f4f6;--rust:#9b3d28;--scale:1}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}body{font-family:"BIZ UDPGothic","Yu Gothic","Meiryo",sans-serif;color:var(--text);background:#18232d;font-feature-settings:"palt" 1}button,a{touch-action:manipulation}button{font:inherit}a{color:var(--blue);text-underline-offset:4px}button:focus-visible,a:focus-visible{outline:3px solid #deaa46;outline-offset:4px}
+#viewport{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}#deck{width:1440px;height:810px;flex-shrink:0;position:relative;transform:scale(var(--scale));transform-origin:center center}
+.slide{position:absolute;inset:0;background:var(--paper);padding:42px 68px 40px;display:none;overflow:hidden;grid-template-rows:34px 100px 1fr 38px;gap:0}
+.slide.active{display:grid}.slide:before{content:"";position:absolute;inset:0 0 auto;height:9px;background:var(--ink)}
+.chapter{font-size:21px;font-weight:700;letter-spacing:.07em;color:var(--blue);margin:0;display:flex;align-items:center;gap:20px}.chapter .part{font-size:19px;font-weight:500;color:var(--muted);letter-spacing:0;border-left:1px solid var(--line);padding-left:20px}
+h1,h2,h3,p,dl{margin:0}h1{font-size:50px;line-height:1.28;letter-spacing:.015em;color:var(--ink);font-weight:700;align-self:center}h2{font-size:33px;line-height:1.45;color:var(--ink)}h3{font-size:27px;line-height:1.45;color:var(--ink)}
+.body{min-height:0;display:flex;flex-direction:column;gap:25px;padding-top:16px;padding-bottom:24px;font-size:31px;line-height:1.65}.body p{line-height:1.65}.lead{font-size:35px;color:var(--ink);line-height:1.6!important}.small{font-size:23px;line-height:1.5!important;color:var(--muted)}.tiny{font-size:20px;line-height:1.5!important;color:var(--muted)}.em{color:var(--blue);font-weight:700}.warn{color:var(--rust);font-weight:700}.rule{border-top:2px solid var(--line);padding-top:22px}.keyline{margin-top:auto!important;padding-top:19px;border-top:3px solid var(--ink);font-size:31px;line-height:1.5!important;font-weight:700;color:var(--ink)}.keyline.light{border-top-color:var(--line)}
+footer{border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:end;font-size:17px;color:var(--muted);letter-spacing:.025em}footer .page{font-size:20px;color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:45px}.two-col>*+*{border-left:1px solid var(--line);padding-left:45px}.plain-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:19px}.plain-list li{position:relative;padding-left:26px}.plain-list li:before{content:"";width:7px;height:7px;position:absolute;left:0;top:.7em;background:var(--blue)}
+.definition{display:grid;grid-template-columns:250px 1fr;gap:20px;align-items:baseline}.definition strong{color:var(--blue);font-size:30px;white-space:nowrap}.definition p{font-size:31px}
+.products{width:100%;border-collapse:collapse;font-size:24px;line-height:1.5;margin-top:0}.products th,.products td{text-align:left;padding:10px 0;border-bottom:1px solid var(--line);vertical-align:top}.products th{width:350px;font-weight:700;color:var(--ink)}.products td{padding-left:25px}.products tr:first-child>*{border-top:2px solid var(--ink)}
+.phase-label{font-size:22px;color:var(--blue);font-weight:700;margin-bottom:13px}.process{display:flex;align-items:center;justify-content:space-between;gap:22px;font-size:32px;line-height:1.55}.process .step{flex:1}.process .arrow{font-size:35px;color:var(--blue)}.process strong{font-size:35px;color:var(--ink)}.process span.desc{font-size:24px;color:var(--muted);display:block;margin-top:8px}
+.knowledge{display:grid;grid-template-columns:250px 1fr;gap:0 25px}.knowledge>*{padding:18px 0;border-bottom:1px solid var(--line)}.knowledge dt{color:var(--blue);font-size:30px;font-weight:700}.knowledge dd{margin:0;font-size:30px}.knowledge dd small{display:block;font-size:23px;color:var(--muted);line-height:1.55;margin-top:5px}
+.matrix{border-collapse:collapse;width:100%;font-size:28px;line-height:1.5}.matrix th,.matrix td{padding:16px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.matrix thead th{font-size:22px;color:var(--muted);border-bottom:2px solid var(--ink);font-weight:500}.matrix td:first-child{font-weight:700;color:var(--ink);width:54%}.matrix th:first-child,.matrix td:first-child{padding-left:0}.matrix th:last-child,.matrix td:last-child{padding-right:0}
+.dialogue{border-left:5px solid var(--line);padding:4px 0 4px 27px}.dialogue .label{font-size:22px;font-weight:700;color:var(--muted);margin-bottom:9px}.dialogue p{font-size:33px;line-height:1.65}.dialogue.better{border-left-color:var(--blue)}.dialogue.better .label{color:var(--blue)}.response{font-size:26px!important;color:var(--muted);margin-top:8px!important}
+.large-quote{font-size:41px!important;line-height:1.75!important;color:var(--ink)}.aside-term{font-size:25px!important;margin-top:24px!important;color:var(--muted)}.check-list{counter-reset:item;list-style:none;margin:0;padding:0}.check-list li{counter-increment:item;padding:0 0 22px 53px;position:relative;font-size:29px;line-height:1.5}.check-list li:before{content:counter(item,decimal-leading-zero);position:absolute;left:0;top:2px;font-size:21px;color:var(--blue);font-weight:700}.check-list small{display:block;font-size:23px;color:var(--muted);margin-top:5px}
+.info-list{display:grid;grid-template-columns:255px 1fr;gap:0 24px}.info-list dt,.info-list dd{padding:15px 0;border-bottom:1px solid var(--line)}.info-list dt{font-weight:700;color:var(--ink);font-size:29px}.info-list dd{margin:0;font-size:28px}.info-list small{font-size:22px;color:var(--muted);display:block;margin-top:4px}
+.settings-row{display:grid;grid-template-columns:230px 1fr;gap:25px;padding-top:18px;border-top:1px solid var(--line)}.settings-row strong{color:var(--blue)}.settings-row p{font-size:29px}.settings-row small{display:block;font-size:23px;color:var(--muted);margin-top:8px}
+.prompt{width:100%;border-collapse:collapse;font-size:27px;line-height:1.45}.prompt th,.prompt td{text-align:left;padding:12px 0;border-bottom:1px solid var(--line);vertical-align:top}.prompt th{width:270px;color:var(--blue)}.prompt th span{color:var(--muted);font-size:20px;font-weight:500;margin-right:20px}.prompt td{padding-left:22px}.prompt tr:first-child>*{border-top:2px solid var(--ink)}
+.final-columns{display:grid;grid-template-columns:1fr 1fr;gap:54px}.final-columns>div+div{border-left:1px solid var(--line);padding-left:54px}.final-columns h2{font-size:38px;margin-bottom:19px}.final-columns p{font-size:29px}.final-columns .detail{color:var(--muted);font-size:25px;margin-top:17px}.study-note{font-size:21px!important;color:var(--muted);line-height:1.55!important;padding-top:15px;border-top:1px solid var(--line)}
+#toolbar{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:6px;background:#152c40;color:#fff;padding:7px 10px;z-index:20;box-shadow:0 3px 18px #0003;transition:opacity .2s;max-width:calc(100vw - 20px)}body.controls-hidden #toolbar{opacity:0;pointer-events:none}#toolbar:focus-within{opacity:1!important;pointer-events:auto!important}#toolbar button{background:none;border:1px solid transparent;color:inherit;font-size:14px;padding:8px 11px;white-space:nowrap;cursor:pointer}#toolbar button:hover{background:#304a5d}#toolbar button:disabled{opacity:.35;cursor:default}#toolbar .divider{height:22px;width:1px;background:#ffffff50;margin:0 4px}#position{font:14px monospace;white-space:nowrap;min-width:55px;text-align:center}#status{position:fixed;left:16px;top:12px;z-index:50;background:var(--ink);color:#fff;padding:8px 14px;font-size:15px;display:none}#status.visible{display:block}
+dialog{border:0;padding:0;width:min(850px,92vw);max-height:86vh;color:var(--text);background:white;box-shadow:0 15px 60px #0005}dialog::backdrop{background:#0c1b2b99}dialog header{position:sticky;top:0;background:white;padding:22px 28px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:20px;z-index:1}dialog header h2{font-size:23px}dialog header button{font-size:16px;border:1px solid var(--line);padding:7px 14px;cursor:pointer;background:white;color:var(--ink)}.modal-body{padding:24px 28px;font-size:17px;line-height:1.9}.modal-body p+p{margin-top:16px}.modal-body h3{font-size:19px;margin:23px 0 8px}.modal-body ul,.modal-body ol{padding-left:1.5em}.modal-body li{margin-bottom:9px}.modal-body .note-warning{background:#f6f0e5;padding:9px 14px;font-size:15px}.source-list a{overflow-wrap:anywhere}.contents-list{list-style:none;padding:0!important;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}.contents-list button{width:100%;text-align:left;border:1px solid var(--line);padding:12px;background:white;font-size:15px;line-height:1.6;cursor:pointer;color:var(--ink)}.contents-list button.current{border:2px solid var(--blue);background:var(--soft)}kbd{font:14px monospace;background:#edf1f4;padding:3px 7px;border:1px solid var(--line)}.help-table{border-collapse:collapse;width:100%}.help-table td{border-bottom:1px solid var(--line);padding:9px}.help-table td:first-child{width:230px}
+#blackout{display:none;position:fixed;inset:0;background:#000;z-index:100;cursor:none}#blackout.on{display:block}body.blanked #toolbar{visibility:hidden}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.notes{display:none}noscript{position:fixed;z-index:90;top:0;background:white;padding:20px}
+
+.agent-names{font-size:32px;line-height:1.4}.agent-names th{width:50%;padding:12px 0}.agent-names td{padding:12px 0 12px 40px;color:var(--muted)}
+.intro-columns{display:grid;grid-template-columns:1fr 1fr;gap:54px}.intro-types{display:flex;flex-direction:column;gap:24px}.intro-types h2{font-size:31px;color:var(--blue);margin-bottom:7px}.intro-types p{font-size:29px;line-height:1.6}.intro-products{border-left:1px solid var(--line);padding-left:38px}.intro-products .agent-names{font-size:29px}.intro-products .agent-names th{width:55%}.intro-products .agent-names td{padding-left:18px}
+.cover{grid-template-rows:34px 260px 1fr 38px}.cover h1{font-size:66px;line-height:1.6;letter-spacing:.01em}.cover-subtitle{font-size:37px;font-weight:500;color:var(--muted)}.cover-body{gap:38px;padding-top:20px}.cover-agenda{list-style:none;margin:0;padding:0;display:flex;gap:62px;font-size:30px;border-top:2px solid var(--line);padding-top:28px}.cover-agenda span{color:var(--blue);font-size:22px;margin-right:17px;font-weight:700}
+.summary-list{list-style:none;padding:0;margin:0;counter-reset:summary;display:flex;flex-direction:column;gap:26px}.summary-list li{counter-increment:summary;padding-left:70px;position:relative}.summary-list li:before{content:counter(summary,decimal-leading-zero);position:absolute;left:0;top:5px;font-size:26px;font-weight:700;color:var(--blue)}.summary-list strong{font-size:35px;color:var(--ink)}.summary-list p{font-size:27px;color:var(--muted);margin-top:6px}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+@media(max-width:650px){#toolbar{gap:0;bottom:8px;padding:5px}#toolbar button{font-size:12px;padding:8px 7px}#toolbar .desktop-label{display:none}.contents-list{grid-template-columns:1fr}}
+@media print{@page{size:381mm 214.3125mm;margin:0}html,body{width:auto;height:auto;overflow:visible;background:white}#viewport{position:static;display:block}#deck{transform:none;width:1440px;height:auto;position:static}.slide,.slide.active{display:grid!important;position:relative;inset:auto;width:1440px;height:810px;break-after:page;page-break-after:always;print-color-adjust:exact;-webkit-print-color-adjust:exact}.slide:last-child{break-after:auto;page-break-after:auto}#toolbar,dialog,#blackout,#status,.sr-only{display:none!important}}
+</style>
+</head>
+<body>
+<noscript>この資料のスライド操作にはJavaScriptを有効にしてください。</noscript>
+<main id="viewport" aria-label="講習スライド"><div id="deck">
+
+<section class="slide cover active" id="slide-1" data-chapter="表紙" data-time="30秒" aria-labelledby="title-1">
+<p class="chapter">社内技術講習</p><h1 id="title-1">AIを使いこなすための基本<br><span class="cover-subtitle">SESエンジニアのためのAIリテラシー</span></h1>
+<div class="body cover-body"><p class="lead">仕組みを知り、ルールを守り、仕事に役立てる。</p>
+<ol class="cover-agenda"><li><span>01</span>AIの基礎</li><li><span>02</span>利用上の注意</li><li><span>03</span>活用のコツ</li></ol></div>
+<footer><span>社内講習資料 · 約20分</span><span class="page">01 / 14</span></footer>
+<div class="notes"><p>今日はAIと正しく付き合うための基本を、仕組み、注意点、活用のコツの順に説明します。特定のツールの操作方法ではなく、参画先のルールを守りながら、仕事でAIを役立てるための考え方を持ち帰ってください。</p></div></section>
+
+<section class="slide" id="slide-2" data-chapter="AIの基礎" data-time="1分" aria-labelledby="title-2">
+<p class="chapter">01　AIの基礎</p><h1 id="title-2">生成AI・AIエージェントとは</h1>
+<div class="body" style="gap:20px">
+<p class="lead"><strong class="em">生成AI</strong>は、入力に応じて文章・コード・画像などを生成するAI。</p>
+<div class="intro-columns">
+<div class="intro-types"><div><h2>チャット型：回答をもらう</h2><p>質問・相談にAIが答え、<br>その回答を使って、人が作業を進める。</p></div><div><h2>エージェント型：作業を任せる</h2><p>目的を伝えると、AIがツールを使い、<br>許可された範囲で作業を進める。</p></div><p class="small" style="font-size:23px">例：修正案を聞く → 修正・テストを任せる</p></div>
+<div class="intro-products"><p class="phase-label">代表的なAIエージェント</p>
+<table class="products agent-names" aria-label="AIエージェント名と会社名"><tbody>
+<tr><th>Codex</th><td>OpenAI</td></tr>
+<tr><th>Claude Code</th><td>Anthropic</td></tr>
+<tr><th>Antigravity</th><td>Google</td></tr>
+<tr><th>GitHub Copilot</th><td>Microsoft</td></tr>
+</tbody></table></div></div>
+<p class="small">紹介する製品が、参画先で利用できるとは限りません。</p>
+</div><footer><span>製品例</span><span class="page">02 / 14</span></footer>
+<div class="notes"><p>生成AIは、入力に応じて文章やコード、画像などを作ります。今日は主に、文章やコードを扱うAIについて説明します。</p><p>使い方の違いとして、チャット型は回答をもらい、人が作業を進める使い方が中心です。エージェント型は、目的に向けてAIがツールを使い、作業を進めます。例えば、修正案を聞いて自分で直す使い方と、ファイルの修正やテストの実行まで任せる使い方の違いです。チャット型でも検索などのツールを使うことがあり、同じ製品に両方の使い方があります。厳密な製品分類ではなく、どこまで仕事を任せるかの違いとして説明してください。実行できる範囲は機能・権限・設定によって異なり、成果の確認は人が行います。</p><p>代表的なAIエージェントとして、Codex（OpenAI）、Claude Code（Anthropic）、Antigravity（Google）、GitHub Copilot（Microsoft）を紹介します。製品ごとは会社名と製品名だけに触れます。製品の紹介は各現場での利用許可を意味しません。</p>
+<ul class="source-list"><li><a href="https://developers.openai.com/blog/codex-as-a-platform">OpenAI Codex公式説明</a></li><li><a href="https://code.claude.com/docs/en/overview">Claude Code公式説明</a></li><li><a href="https://www.antigravity.google/docs/overview">Google Antigravity公式説明</a></li><li><a href="https://docs.github.com/en/copilot/concepts/agents">GitHub Copilot公式説明</a></li></ul></div></section>
+
+<section class="slide" id="slide-3" data-chapter="AIの基礎" data-time="2分" aria-labelledby="title-3">
+<p class="chapter">01　AIの基礎</p><h1 id="title-3">AIはどうやって回答を作るのか</h1>
+<div class="body" style="gap:28px">
+<p class="lead">ざっくり言うと、文脈に合う<span class="em">「それっぽい」言葉</span>を、<br><span class="em">確率にもとづいて選び、つないでいる。</span></p>
+<div class="rule"><p class="phase-label">大量の文章から学んだパターンを使って</p>
+<div class="process" aria-label="質問や会話の流れをもとに次に続きそうな言葉を選び、繰り返して回答を作る">
+<div class="step"><strong>会話の流れをもとに</strong><span class="desc">質問や、それまでのやり取り</span></div><span class="arrow" aria-hidden="true">→</span>
+<div class="step"><strong>続きそうな言葉を選ぶ</strong><span class="desc">候補それぞれの確率をもとに</span></div><span class="arrow" aria-hidden="true">→</span>
+<div class="step"><strong>繰り返して回答に</strong><span class="desc">選んだ言葉の、さらに続きを作る</span></div></div></div>
+<p class="small">文章を自然につなげられても、内容が事実かどうかは別の確認が必要。</p>
+<p class="keyline">「それっぽい答え」と「正しい答え」は、同じとは限らない。</p>
+</div><footer><span>主にLLM（大規模言語モデル）の基本的な生成の仕組み</span><span class="page">03 / 14</span></footer>
+<div class="notes"><p>難しい言葉を使わずに言えば、AIは質問や会話の流れをもとに「次にどんな言葉が来そうか」を予測し、つないでいます。大量の文章から学んだパターンを使い、候補それぞれの確率をもとに選びます。</p><p>例えば「おはよう」に続ける言葉として「ございます」は自然です。このように、ここまでの内容に合う続きを作り、さらに続きを作ります。この例は説明のためのイメージで、実際のモデルの確率を測定したものではありません。</p><p>厳密には単語単位とは限らず、文字や単語の断片であるトークン単位で生成します。常に最も確率の高い候補を選ぶわけでもありません。「それっぽい」は基本動作を直感的に説明する表現で、でたらめに選ぶ、推論できない、という意味ではありません。</p><p>推論向けの訓練や検索・ツール利用もありますが、自然な文章を生成することだけでは正しさは保証されません。だから、業務では根拠と結果を確認します。</p><p>参照：<a href="https://openai.com/index/why-language-models-hallucinate/">OpenAI：Why language models hallucinate</a></p></div></section>
+
+<section class="slide" id="slide-4" data-chapter="AIの基礎" data-time="1分30秒" aria-labelledby="title-4">
+<p class="chapter">01　AIの基礎</p><h1 id="title-4">AIが使える情報には、範囲がある</h1>
+<div class="body" style="gap:15px">
+<dl class="knowledge"><dt>学習した知識</dt><dd>学習データには、時点の区切りがある。<small>ナレッジカットオフ：学習由来の知識の目安となる時点。</small></dd><dt>ツールで得る情報</dt><dd>検索や接続先から、その場で取得する情報。<small>検索機能があっても、毎回使われる・正しく読めるとは限らない。</small></dd><dt>こちらが渡す情報</dt><dd>目的、条件、会話、提供した資料。<small>参画先固有の仕様や運用ルールは、知っているとは限らない。</small></dd></dl>
+<p class="keyline">最新情報は一次情報で確認。現場の前提は、許可された範囲で渡す。</p>
+</div><footer><span>「知っていそう」と「確認できている」を分ける</span><span class="page">04 / 14</span></footer>
+<div class="notes"><p>ナレッジカットオフはモデルごとに異なります。それ以前の情報をすべて正しく覚えているという意味でも、それ以降の情報を検索などで取得できないという意味でもありません。</p><p>例えばライブラリの新しい仕様は公式ドキュメントで確かめます。社内バッチの再実行ルールは、AIが当然知っている前提にしないでください。ただし、知らないからといって顧客資料を何でも渡してよいわけではありません。この点は後半で扱います。</p><p>ここまでで回答の作られ方と情報の範囲を押さえました。続いて、その性質から生じる利用上の注意点を見ます。</p></div>
+</section>
+
+<section class="slide" id="slide-5" data-chapter="利用上の注意" data-time="2分" aria-labelledby="title-5">
+<p class="chapter">02　利用上の注意</p><h1 id="title-5">もっともらしい回答にも、誤りがある</h1>
+<div class="body" style="gap:18px">
+<p class="lead"><span class="em">ハルシネーション</span>：事実に反する内容を、もっともらしく生成すること。</p>
+<table class="matrix"><thead><tr><th>特に確認したい場面</th><th>確認の仕方</th></tr></thead><tbody><tr><td>最新の仕様・バージョン・料金</td><td>公式情報と更新日を見る</td></tr><tr><td>API・コマンド・出典の存在</td><td>実在と、内容の一致を確かめる</td></tr><tr><td>前提が不足した設計・障害調査</td><td>事実と推測を分ける</td></tr><tr><td>多くの条件・例外・境界値</td><td>条件を整理し、テストする</td></tr></tbody></table>
+<p class="keyline">自信のある言い方を、正しさの根拠にしない。</p>
+</div><footer><span>確認を厚くしたい場面の例。誤りの頻度はモデルや条件で異なる</span><span class="page">05 / 14</span></footer>
+<div class="notes"><p>AIは「わかりません」と言う代わりに、もっともらしい答えを生成することがあります。ここでは特定の製品の弱点ランキングではなく、業務で確認を厚くしたい場面を示しています。</p><p>存在しないAPIを呼び出すコードは、見た目がきれいでも動きません。URLが書かれていても、そのページが存在し、実際に主張を裏づけているか確認します。障害調査では、観測された事実と、原因の仮説を混ぜないことが大事です。</p><p>「絶対に間違えないで」と頼むだけでは保証になりません。コードは差分とテスト、仕様は一次情報、数値は再計算というように、外から確認できる方法を用意します。</p><p>参照：<a href="https://openai.com/index/why-language-models-hallucinate/">OpenAI：ハルシネーションの背景</a></p></div>
+</section>
+
+<section class="slide" id="slide-6" data-chapter="利用上の注意" data-time="1分" aria-labelledby="title-6">
+<p class="chapter">02　利用上の注意</p><h1 id="title-6">AIは、あなたに同意しすぎることがある</h1>
+<div class="body" style="gap:25px">
+<p class="lead"><span class="em">忖度・迎合</span>：利用者の意見に、回答を合わせすぎること。</p>
+<div class="dialogue"><p class="label">誘導する聞き方［架空例］</p><p>「再実行できるので、重複登録の対策は不要ですよね？」</p><p class="response">→ 同意されても、この設計が正しい証拠にはならない。</p></div>
+<div class="dialogue better"><p class="label">検討を促す聞き方</p><p>「再実行時に起こり得る問題と、必要な対策を挙げて。<br>私の前提に誤りがあれば指摘して。」</p></div>
+<p class="keyline">賛成を集めるより、根拠・反証・見落としを確かめる。</p>
+</div><footer><span>迎合は常に起きるわけではなく、依頼の工夫だけで完全には防げない</span><span class="page">06 / 14</span></footer>
+<div class="notes"><p>AIは利用者を意図的に喜ばせようとする人間ではありませんが、結果として意見を肯定しすぎる回答をすることがあります。提供元からも迎合の事例が報告されています。</p><p>この例は実際の会話ログではなく講習用の架空例です。「不要ですよね」と結論を誘導するより、起こり得る問題と根拠を求めます。ただし、反論を求めた回答にも誤りはあり得ます。最後は仕様やテストに戻って確認します。</p><p>参照：<a href="https://openai.com/index/sycophancy-in-gpt-4o/">OpenAI：Sycophancy in GPT-4o</a></p></div>
+</section>
+
+<section class="slide" id="slide-7" data-chapter="利用上の注意" data-time="1分30秒" aria-labelledby="title-7">
+<p class="chapter">02　利用上の注意</p><h1 id="title-7">判断と責任を、AIに丸投げしない</h1>
+<div class="body" style="gap:30px">
+<div class="two-col" style="margin-top:12px"><div><p class="large-quote">「理由は説明できない。<br>でも、AIがそう<br>言っていたので……」</p><p class="aside-term"><strong>認知的降伏</strong><br>十分に吟味せず、AIの答えを受け入れる。</p></div><div><ol class="check-list"><li>前提と根拠を確かめる<small>何が事実で、何が推測か。</small></li><li>成果物を検証する<small>一次情報・コード差分・テスト結果。</small></li><li>採用理由を説明する<small>参画先のレビュー・承認も守る。</small></li></ol></div></div>
+<p class="keyline">AIのアウトプットを採用する判断と説明責任は、人が持つ。</p>
+</div><footer><span>AIの「問題ありません」は、現場の承認の代わりにはならない</span><span class="page">07 / 14</span></footer>
+<div class="notes"><p>認知的降伏は、AIの回答を十分に吟味せず、自分の判断の代わりに受け入れることとして紹介します。単に作業を任せることとは違います。自分で全部書く必要はありませんが、何を採用したか説明できる状態を目指します。</p><p>例えばテストが通ったと言われたら、対象・実行結果・テストしていない範囲も確認します。生成したテストとコードが同じ誤解に基づいている可能性があるため、仕様に照らした確認も必要です。</p><p>ここでの責任は業務上の確認・採用・説明責任です。法的責任が常に利用者だけにあるという説明ではありません。現場のレビューや本番変更の承認は通常どおり守ります。</p><p>参照：<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6097646">Shaw・Nave：認知的降伏に関する研究（SSRN掲載版、査読状況未確認）</a></p></div>
+</section>
+
+<section class="slide" id="slide-8" data-chapter="利用上の注意" data-time="1分30秒" aria-labelledby="title-8">
+<p class="chapter">02　利用上の注意</p><h1 id="title-8">自社・参画先のルールを、利用前に確認する</h1>
+<div class="body" style="gap:13px">
+<p class="lead"><strong>シャドーAI</strong>：組織が把握・承認していないAIの業務利用。</p>
+<div class="settings-row"><strong>環境を確認</strong><p>使える製品・アカウント・端末・入力情報。<small>私用アカウントや自社契約のAIでも、参画先の許可とは別。</small></p></div>
+<div class="settings-row"><strong>設定を確認</strong><p>学習利用のOFFなど、指定されたデータ管理設定。<small>学習OFFでも、保存・外部送信・機密情報の入力可否は別に確認。</small></p></div>
+<div class="settings-row"><strong>操作を確認</strong><p>読める範囲、変更できる範囲、承認が必要な操作。<small>ファイル変更・外部送信・本番操作まで、一括で任せない。</small></p></div>
+<p class="keyline">不明なら、利用前に自社責任者と参画先の指定窓口へ。</p>
+</div><footer><span>前の現場での許可は、次の現場には持ち越さない</span><span class="page">08 / 14</span></footer>
+<div class="notes"><p>便利だから私用のAIを使う、使えない現場の資料を自宅で処理する、という行動は避けます。製品だけでなくアカウント、契約、設定まで含めて確認してください。</p><p>学習利用を止める設定は、保存や送信の有無とは別です。製品・契約で既定値や設定の有無が違うので、会社指定の環境と設定に従います。例としてChatGPTでは、学習利用をOFFにしても会話は履歴に残ると説明されています。</p><p>エージェントは回答だけでなく操作もするので、アクセスと変更の範囲も確認します。不明点やルールの矛盾は、自社責任者と参画先の所定窓口に確認します。次は、現場で扱う情報の入力可否を具体的に見ていきます。</p><p>参照：<a href="https://help.openai.com/en/articles/7730893-data-controls-in-chatgpt">ChatGPTのデータ管理に関する公式説明</a></p></div>
+</section>
+
+<section class="slide" id="slide-9" data-chapter="利用上の注意" data-time="1分30秒" aria-labelledby="title-9">
+<p class="chapter">02　利用上の注意</p><h1 id="title-9">参画先の情報を、そのAIに渡してよいか</h1>
+<div class="body" style="gap:18px">
+<p class="lead">入力可否は、<span class="em">情報の種類 × 利用環境 × 現場のルール</span>で判断する。</p>
+<dl class="info-list"><dt>公開情報・架空例</dt><dd>公開ドキュメント、自作の練習用データなど。<small>利用するツール自体も、認められたものを使う。</small></dd><dt>案件の情報</dt><dd>コード、設計書、構成情報、障害ログ、顧客情報。<small>承認された範囲を確認。私用AIへの持ち出しはしない。</small></dd><dt>認証・秘密情報</dt><dd>パスワード、APIキー、秘密鍵など。<small>プロンプトや添付資料へ、そのまま含めない。</small></dd></dl>
+<p class="keyline">「自分が書いた」「顧客名を消した」だけで、入力可とは判断しない。</p>
+</div><footer><span>添付資料・参照ファイル・ログなど、エージェントが読む情報も対象</span><span class="page">09 / 14</span></footer>
+<div class="notes"><p>SESでは、自社の情報だけでなく参画先から預かっている情報を扱います。自社がAIを導入していることだけで、顧客のコードを入力できるとは限りません。自社と参画先のルール、契約上の制約の双方を確認します。</p><p>自分が書いたコードでも案件の情報です。顧客名を消しても、構成や業務の特徴から情報が残る場合があります。匿名化したから許可は不要、とは考えないでください。</p><p>チャットへの貼り付けだけでなく、添付、開いたフォルダー、エージェントが自動で読むファイル、コマンド出力も確認対象です。この表は講習の確認方針で、特定の現場の入力可否を判定したものではありません。ここまでが利用上の注意です。次は、認められた範囲で役立てる依頼の仕方を見ます。</p></div>
+</section>
+
+<section class="slide" id="slide-10" data-chapter="活用のコツ" data-time="1分30秒" aria-labelledby="title-10">
+<p class="chapter">03　活用のコツ</p><h1 id="title-10">まず「何を達成したいか」を伝える</h1>
+<div class="body" style="gap:27px">
+<div class="dialogue"><p class="label">目的が見えない依頼［架空例］</p><p>「テスト項目を10個、表で出して。」</p></div>
+<div class="dialogue better"><p class="label">目的・背景・条件を伝える依頼</p><p>「バッチの再実行で、重複登録が起きないことを確認したい。<br>変更前後の仕様をもとに、必要なテスト観点を整理して。<br>判断に足りない情報は、先に質問して。」</p></div>
+<p class="small">AIが働くためには情報が必要。必要な制約・品質基準・必須手順も明示する。</p>
+<p class="keyline">細かな手順を並べる前に、目的と完了条件を共有する。</p>
+</div><footer><span>現場の情報は、入力が許可された範囲で共有する</span><span class="page">10 / 14</span></footer>
+<div class="notes"><p>「テストを10個」と言えば、AIは数を満たす方向に動きます。しかし目的が重複登録を防ぐことなら、10個で十分かどうかは別の話です。何を確かめたいのかを先に伝えると、必要な観点を相談できます。</p><p>細かい指示を一切しないという意味ではありません。変更禁止のファイル、使える技術、必ず通すレビューなどは明示します。手順そのものに意味がある現場では、その手順も守らせます。</p><p>AIは参画先の事情を自動で知っているわけではありません。許可された背景情報と、成功の条件を渡し、情報不足なら質問させます。資料の例は架空の業務です。</p></div>
+</section>
+
+<section class="slide" id="slide-11" data-chapter="活用のコツ" data-time="2分" aria-labelledby="title-11">
+<p class="chapter">03　活用のコツ</p><h1 id="title-11">プロンプトに含める6つの情報</h1>
+<div class="body" style="gap:16px">
+<p class="small">例：バッチ変更に向けて、テスト観点を洗い出す［架空の条件］</p>
+<table class="prompt"><tbody>
+<tr><th><span>01</span>目的</th><td>再実行しても、重複登録が起きないことを確認したい。</td></tr>
+<tr><th><span>02</span>背景・現状</th><td>日次バッチを、失敗時に再実行できる仕様へ変更する。</td></tr>
+<tr><th><span>03</span>参照情報</th><td>変更前後の仕様、既存のテスト観点を渡す。</td></tr>
+<tr><th><span>04</span>制約</th><td>本番データは使わない。まず観点整理だけを行う。</td></tr>
+<tr><th><span>05</span>期待する成果物</th><td>「条件・操作・期待結果」の表にする。</td></tr>
+<tr><th><span>06</span>完了・評価基準</th><td>正常・異常・途中失敗・再実行を扱い、未確認点も示す。</td></tr>
+</tbody></table>
+<p class="keyline light">足りない情報は質問させ、事実と仮定を分けてもらう。</p>
+</div><footer><span>プロンプト＝AIへの依頼文。必要な情報量は、仕事の複雑さに合わせる</span><span class="page">11 / 14</span></footer>
+<div class="notes"><p>この6つは毎回長文で書くためのルールではなく、依頼の抜けを点検する型です。単純な質問なら短くて構いません。仕事の背景や制約が複雑なほど、共有する必要があります。</p><p>目的と成果物は別です。目的は何を達成したいか、成果物はどの形式で受け取りたいか。完了基準は、何を満たせば仕事が終わったと言えるかです。表ができただけでは、重要な異常系が抜けているかもしれません。</p><p>この例では、本番データを使わず、観点整理までに操作を限定しています。実際には入力できる仕様書や情報の範囲も確認します。AIが不足を埋めるために仮定した内容は、未確認とわかるように示させてください。</p></div>
+</section>
+
+<section class="slide" id="slide-12" data-chapter="活用のコツ" data-time="1分30秒" aria-labelledby="title-12">
+<p class="chapter">03　活用のコツ</p><h1 id="title-12">最初の回答を確認し、指摘して改善する</h1>
+<div class="body" style="gap:31px">
+<div class="process" style="padding:14px 0 25px;border-bottom:1px solid var(--line)"><div class="step"><strong>出力を確認</strong><span class="desc">仕様・根拠・期待と照合</span></div><span class="arrow" aria-hidden="true">→</span><div class="step"><strong>ずれを伝える</strong><span class="desc">誤り・不足を具体的に</span></div><span class="arrow" aria-hidden="true">→</span><div class="step"><strong>修正を再確認</strong><span class="desc">差分と影響を検証</span></div></div>
+<div class="dialogue better"><p class="label">具体的なフィードバック［架空例］</p><p>「途中失敗後の再実行が抜けています。<br>処理済みデータが残る場合を追加し、<br>期待結果の根拠も示してください。」</p></div>
+<p class="keyline">自分の案にも反証を求める。最終確認は、仕様・実物・テストで。</p>
+</div><footer><span>AI自身による点検だけでは、正しさの保証にならない</span><span class="page">12 / 14</span></footer>
+<div class="notes"><p>最初の回答がそのまま完成品になるとは限りません。レビューで指摘を受けて改善する前提で扱います。「もっとよくして」だけでは何が足りないか伝わらないので、期待との差を具体的に示します。</p><p>例では、抜けている場面、追加すべき条件、期待する説明の3点を伝えています。修正後も、別の観点が消えていないか、仕様に合っているかを見ます。</p><p>逆方向の使い方として、自分の案の見落としや反証をAIに挙げてもらうと、考える範囲を広げられます。ただし、AIが自分の出力を点検して「大丈夫」と言うだけでは独立した確認にはならず、実物や根拠に戻って確かめます。</p></div>
+</section>
+
+<section class="slide" id="slide-13" data-chapter="活用のコツ" data-time="1分30秒" aria-labelledby="title-13">
+<p class="chapter">03　活用のコツ</p><h1 id="title-13">幅広い知識と、仕事を任せる力を磨く</h1>
+<div class="body" style="gap:26px">
+<div class="final-columns"><div><h2>幅広い知識</h2><p>得意分野を軸に、<br>業務と技術のつながりを理解する。</p><p class="detail">アプリ・DB・インフラ・セキュリティ・運用。<br>影響範囲と、見落としを判断する。</p></div><div><h2>マネジメント能力</h2><p>目的を決め、仕事を分け、<br>進捗と品質を確かめる。</p><p class="detail">完了条件・優先順位・委任・軌道修正。<br>管理職だけに必要な力ではない。</p></div></div>
+<p class="keyline" style="font-size:35px">AIで思考を広げる。何を採用するかは、自分で決める。</p>
+</div><footer><span>参画先のルールを守り、経験から学び続ける</span><span class="page">13 / 14</span></footer>
+<div class="notes"><p>AI時代の成長の方向として、幅広い知識とマネジメント能力を提案します。専門性を捨てるという意味ではありません。得意分野を軸に、隣接領域を理解すると、課題を定義し、AIの提案の影響や抜けを判断する助けになります。</p><p>マネジメントは管理職の肩書きに限りません。目標と完了条件を決め、仕事を分け、優先順位と依存関係を整理し、進捗・品質を確認して軌道修正する力です。関係者の合意を得て成果を説明することも含みます。AIに仕事を任せて成果を確認するときにも、この力を使います。</p><p>Anthropicの研究は課題の専門知識と成功の関連を報告し、管理職群については委任技能の寄与の可能性に言及しています。ただし、会話中の完了確認の違いが測定に影響する可能性があります。実業務の成果や因果関係を直接測ったものではなく、幅広い知識とマネジメント能力を磨こうという部分は講習の提言です。</p><p>SESの現場で得た知識や進め方は、一般化して自分の力にします。非公開の資料やコードを持ち出すこととは区別してください。現場でAIを使えない場合も、許可された環境で公開情報や自作の架空課題を使って学べます。AIを思考の拡張として使い、判断は自分で行う。この姿勢を持ち帰ってください。</p><p>参照：<a href="https://www.anthropic.com/research/claude-code-expertise">Anthropic：Agentic coding and persistent returns to expertise（2026年6月16日）</a></p></div>
+</section>
+
+<section class="slide" id="slide-14" data-chapter="まとめ" data-time="1分" aria-labelledby="title-14">
+<p class="chapter">まとめ</p><h1 id="title-14">AIと付き合うために、押さえたいこと</h1>
+<div class="body" style="gap:26px">
+<ol class="summary-list"><li><strong>答えは、根拠と結果で確かめる。</strong><p>自然な文章や、自分への同意を、正しさの証拠にしない。</p></li>
+<li><strong>自社・参画先のルールに従う。</strong><p>使える環境・入力情報・操作範囲を、利用前に確認する。</p></li>
+<li><strong>目的を伝え、対話して改善する。</strong><p>幅広い知識とマネジメント能力を、AI活用の土台にする。</p></li></ol>
+<p class="keyline">AIを思考の拡張に。採用する判断と責任は、人が持つ。</p>
+</div><footer><span>現場のルールを確認し、認められた範囲で小さく試す</span><span class="page">14 / 14</span></footer>
+<div class="notes"><p>最後に3点を振り返ります。第一に、AIは自然で説得力のある文章を作れても誤ることがあるため、根拠と結果を確かめます。第二に、自社と参画先が認める環境・情報・操作範囲を守ります。第三に、目的と背景を伝え、結果を確認して指摘しながら改善します。</p><p>AIを使うほど、人間の知識や判断が不要になるとは考えないでください。幅広い知識で課題を理解し、マネジメント能力で仕事を成果につなげます。現場のルールを確認して、認められた範囲で小さく試すことから始めてください。AIは自分の思考を広げる道具であり、採用する判断と説明責任は人が持ちます。</p></div></section>
+</div></main>
+
+<nav id="toolbar" aria-label="スライド操作"><button id="prev" title="前へ（← / PageUp）" aria-label="前のスライド">←</button><span id="position" aria-live="polite">1 / 14</span><button id="next" title="次へ（→ / Space / PageDown）" aria-label="次のスライド">→</button><span class="divider"></span><button id="contents" title="目次（O）">目次</button><button id="fullscreen" title="全画面（F）">全画面</button><button id="notes" title="ノートをこの画面に表示（N）">ノート</button><button id="refs" title="出典（R）">出典</button><button id="help" title="操作説明（H / ?）">操作<span class="desktop-label">説明</span></button></nav>
+<dialog id="modal" aria-labelledby="modal-title"><header><h2 id="modal-title"></h2><button id="close-modal" autofocus>閉じる</button></header><div class="modal-body" id="modal-body"></div></dialog>
+<div id="blackout" aria-label="画面を暗転しています。Bキーまたはクリックで戻ります。"></div><div id="status" role="status"></div><div id="announcement" class="sr-only" aria-live="polite"></div>
+<script>
+(()=>{'use strict';
+const slides=[...document.querySelectorAll('.slide')],count=slides.length,modal=document.getElementById('modal'),modalTitle=document.getElementById('modal-title'),modalBody=document.getElementById('modal-body'),blackout=document.getElementById('blackout');
+let index=0,hideTimer,statusTimer,touchStart=null;
+const $=id=>document.getElementById(id);
+function fit(){document.documentElement.style.setProperty('--scale',Math.min(innerWidth/1440,innerHeight/810));}
+function wake(){document.body.classList.remove('controls-hidden');clearTimeout(hideTimer);hideTimer=setTimeout(()=>{if(!modal.open&&!$('toolbar').matches(':hover')&&!$('toolbar').contains(document.activeElement))document.body.classList.add('controls-hidden');},2600);}
+function flash(message){$('status').textContent=message;$('status').classList.add('visible');clearTimeout(statusTimer);statusTimer=setTimeout(()=>$('status').classList.remove('visible'),3800);}
+function show(n,updateHash=true){index=Math.max(0,Math.min(count-1,n));slides.forEach((s,i)=>{s.classList.toggle('active',i===index);s.setAttribute('aria-hidden',String(i!==index));});$('position').textContent=`${index+1} / ${count}`;$('prev').disabled=index===0;$('next').disabled=index===count-1;$('announcement').textContent=`${index+1}枚目 ${slides[index].querySelector('h1').textContent}`;document.title=`${index+1}/${count} ${slides[index].querySelector('h1').textContent}｜AIリテラシー`;if(updateHash){try{history.replaceState(null,'',`#slide-${index+1}`);}catch{location.hash=`slide-${index+1}`;}}}
+function fromHash(){const m=location.hash.match(/^#slide-(\d+)$/);show(m?Number(m[1])-1:0,false);}
+function openModal(title,html){modalTitle.textContent=title;modalBody.innerHTML=html;modal.showModal();modal.scrollTop=0;wake();modalBody.querySelectorAll('a').forEach(a=>{a.target='_blank';a.rel='noopener noreferrer';});}
+function openNotes(){const s=slides[index];openModal(`発表者ノート　${index+1} / ${count}　目安 ${s.dataset.time}`,`<p class="note-warning">このノートは現在の画面に表示されます。投影中は受講者にも見えます。</p><h3>${s.querySelector('h1').textContent}</h3>${s.querySelector('.notes').innerHTML}`);}
+function openContents(){openModal('目次 · 全14枚 / 20分',`<ol class="contents-list">${slides.map((s,i)=>`<li><button data-slide="${i}" class="${i===index?'current':''}">${String(i+1).padStart(2,'0')}　${s.querySelector('h1').textContent}<br><span style="color:var(--muted)">${s.dataset.chapter} · ${s.dataset.time}</span></button></li>`).join('')}</ol>`);modalBody.querySelectorAll('[data-slide]').forEach(b=>b.addEventListener('click',()=>{show(Number(b.dataset.slide));modal.close();}));}
+function openRefs(){const links=new Map();slides.forEach((s,i)=>s.querySelectorAll('.notes a').forEach(a=>{if(!links.has(a.href))links.set(a.href,{label:a.textContent,pages:[]});links.get(a.href).pages.push(i+1);}));openModal('出典・資料について',`<p>公式情報の確認：2026年10月11日。リンク先の閲覧にはインターネット接続が必要です。スライド本体はオフラインで利用できます。</p><ul class="source-list">${[...links].map(([url,v])=>`<li><a href="${url}">${v.label}</a><br><small>関連スライド：${v.pages.join('、')}</small></li>`).join('')}</ul><h3>教材の位置づけ</h3><p>依頼文・業務条件は講習用の架空例です。実際の顧客情報は使用していません。利用可否は自社・参画先のルールと契約上の制約を確認してください。</p><p>研究結果と講習の提言は区別しています。製品の料金・利用条件・モデルの仕様は変わるため、導入時に最新の公式情報を確認してください。</p>`);}
+function openHelp(){openModal('操作説明',`<p>ブラウザーで開き、全画面表示にすると投影しやすくなります。画面比率は16:9です。</p><table class="help-table"><tr><td><kbd>→</kbd> <kbd>Space</kbd> <kbd>PageDown</kbd></td><td>次のスライド</td></tr><tr><td><kbd>←</kbd> <kbd>PageUp</kbd></td><td>前のスライド</td></tr><tr><td><kbd>Home</kbd> / <kbd>End</kbd></td><td>最初 / 最後へ</td></tr><tr><td><kbd>F</kbd></td><td>全画面の切り替え</td></tr><tr><td><kbd>B</kbd></td><td>暗転 / 復帰</td></tr><tr><td><kbd>O</kbd></td><td>目次</td></tr><tr><td><kbd>N</kbd></td><td>現在のスライドのノートを表示</td></tr><tr><td><kbd>R</kbd></td><td>出典</td></tr><tr><td><kbd>H</kbd> / <kbd>?</kbd></td><td>この操作説明</td></tr><tr><td><kbd>Esc</kbd></td><td>表示中のダイアログを閉じる / 全画面を解除</td></tr><tr><td><kbd>Ctrl</kbd> + <kbd>P</kbd></td><td>全スライドを印刷・PDF保存</td></tr></table><p>操作バーは静止後に隠れます。マウスを動かすと再表示されます。ノートは投影画面にも表示されるため、事前の確認用としてお使いください。</p><p>印刷時は「背景のグラフィック」を有効にし、ブラウザーのヘッダー・フッターを無効にするときれいに出力できます。</p>`);}
+async function fullscreen(){try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{flash('全画面にできませんでした。ブラウザーのF11キーも利用できます。');}}
+function toggleBlack(){blackout.classList.toggle('on');document.body.classList.toggle('blanked',blackout.classList.contains('on'));}
+$('prev').onclick=()=>show(index-1);$('next').onclick=()=>show(index+1);$('contents').onclick=openContents;$('notes').onclick=openNotes;$('refs').onclick=openRefs;$('help').onclick=openHelp;$('fullscreen').onclick=fullscreen;$('close-modal').onclick=()=>modal.close();blackout.onclick=toggleBlack;
+modal.addEventListener('click',e=>{if(e.target===modal){const r=modal.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)modal.close();}});modal.addEventListener('close',wake);
+document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey)return;if(modal.open)return;const k=e.key.toLowerCase();if(blackout.classList.contains('on')){if(['b','escape',' '].includes(k)){e.preventDefault();toggleBlack();}return;}if(e.target.closest('button')&&(k===' '||k==='enter'))return;switch(k){case'arrowright':case'arrowdown':case'pagedown':case' ':e.preventDefault();show(index+1);break;case'arrowleft':case'arrowup':case'pageup':e.preventDefault();show(index-1);break;case'home':e.preventDefault();show(0);break;case'end':e.preventDefault();show(count-1);break;case'f':e.preventDefault();fullscreen();break;case'b':e.preventDefault();toggleBlack();break;case'o':openContents();break;case'n':openNotes();break;case'r':openRefs();break;case'h':case'?':openHelp();break;}});
+document.addEventListener('pointermove',wake);document.addEventListener('focusin',wake);document.addEventListener('touchstart',e=>{if(!modal.open)touchStart={x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY};},{passive:true});document.addEventListener('touchend',e=>{if(touchStart&&!modal.open&&!blackout.classList.contains('on')){const dx=e.changedTouches[0].clientX-touchStart.x,dy=e.changedTouches[0].clientY-touchStart.y;if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.5)show(index+(dx<0?1:-1));}touchStart=null;wake();},{passive:true});
+addEventListener('resize',fit);addEventListener('hashchange',fromHash);document.addEventListener('fullscreenchange',()=>{$('fullscreen').textContent=document.fullscreenElement?'全画面解除':'全画面';fit();});fit();fromHash();wake();
+})();
+</script>
+</body>
+</html>
